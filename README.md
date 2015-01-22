@@ -1,5 +1,5 @@
 #org.brutusin:logging-instrumentation [![Build Status](https://api.travis-ci.org/brutusin/logging-instrumentation.svg?branch=master)](https://travis-ci.org/brutusin/logging-instrumentation)
-This module is an extension of [instrumentation module](https://github.com/brutusin/instrumentation) and defines an interceptor ([LoggingInterceptor](src/main/java/org/brutusin/instrumentation/logging/LoggingInterceptor.java)) aimed at logging executions of third-party code.
+This module is an extension of [instrumentation module](https://github.com/brutusin/instrumentation) that defines an interceptor ([LoggingInterceptor](src/main/java/org/brutusin/instrumentation/logging/LoggingInterceptor.java)) aimed at logging executions of third-party code.
 
 ## Output
 
@@ -7,9 +7,9 @@ For each execution of an instrumented method, the agent generates a file such wi
 
 * **Source**: Method instrumented
 * **Start**: Execution start date
-* **Parameters**: Serialization (if possible) of the method arguments
+* **Parameters**: JSON Serialization (if possible) of the method arguments
 * **Elapsed**: Execution duration
-* **Returned**: Serialization (if possible) of the method arguments/exceptions
+* **Returned**: JSON Serialization (if possible) of the method arguments/exceptions
 
 Files are ordered according to their execution order, and grouped in folders by the execution thread. Root logging folder is passed as an interceptor parameter via the agent parameters.
 
@@ -45,6 +45,7 @@ Causing the following three files being generated under `${java.io.tmpdir}/${pro
 ```
 
 with content:
+
 *1-1-org.brutusin.instrumentation.logging.SimpleClass.sayHello().log*:
 ```
 #Source: public static java.lang.String org.brutusin.instrumentation.logging.SimpleClass.sayHello(java.lang.String)
@@ -76,10 +77,23 @@ with content:
 "Goodbye to you, goodbye to broken hearts"
 ```
 
-## Status of the project
-This project is still under development but serves well as an example.
+## TODO
+This project is still under development but serves well as an example. The most important issue is the implementation of this [LoggingInterceptorTest](src/test/java/org/brutusin/instrumentation/logging/LoggingInterceptorTest.java) methods:
+```java
+ @Override
+    public boolean interceptClass(String className, byte[] byteCode) {
+        return className.endsWith("SimpleClass");
+    }
 
+    @Override
+    public boolean interceptMethod(ClassNode cn, MethodNode mn) {
+        return true;
+    }
+```
+making the module non-reusable.
+The idea to a future implementation is to load a configuration file from the root logging folder passed, for example a `logging.json`, defining the rules to be used by the interceptor to evaluate if a class or method is being instrumented.
 
+Nevertheless and for the time being, you can create your own implementation based on this example.
 
 ## Support, bugs and requests
 https://github.com/brutusin/logging-instrumentation/issues
