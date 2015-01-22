@@ -16,20 +16,36 @@ Files are ordered according to their execution order, and grouped in folders by 
 ## Tests
 Remark that project tests are run after a fat-agent-jar ([jar-with-dependencies](http://maven.apache.org/plugins/maven-assembly-plugin/descriptor-refs.html#jar-with-dependencies)) is created and the *interceptor* class name is passed as the agent options (see [pom.xml](pom.xml))
 
-In this example the only instrumented methods are those of [SimpleClass](/src/test/java/org/brutusin/instrumentation/logging/SimpleClass.java), being the relevant application code ([LoggingInterceptorTest](src/test/java/org/brutusin/instrumentation/logging/LoggingInterceptorTest.java)):
+In this example the only instrumented methods are those of [SimpleClass](/src/test/java/org/brutusin/instrumentation/logging/SimpleClass.java):
+```java
+public static String sayHello(String name) {
+    return "Hello " + name + ", you fool, I love youuu! " + joinTheJoyRide();
+}
+
+public static String joinTheJoyRide() {
+    return "C'mon join the joyrideee!";
+}
+
+public static String sayGoodBye() {
+    return "Goodbye to you, goodbye to broken hearts";
+}
+```
+
+, being the relevant application code ([LoggingInterceptorTest](src/test/java/org/brutusin/instrumentation/logging/LoggingInterceptorTest.java)):
 ```java
 SimpleClass.sayHello("world");
 SimpleClass.sayGoodBye();
 ```
 
-Causing the following files being generated under `${java.io.tmpdir}/${project.artifactId}-tests`:
+Causing the following three files being generated under `${java.io.tmpdir}/${project.artifactId}-tests` (one per method execution):
 ```
 1-1-org.brutusin.instrumentation.logging.SimpleClass.sayHello().log
 1-2-org.brutusin.instrumentation.logging.SimpleClass.joinTheJoyRide().log
 1-3-org.brutusin.instrumentation.logging.SimpleClass.sayGoodBye().log
 ```
 
-with content like that (case of *1-1-org.brutusin.instrumentation.logging.SimpleClass.sayHello().log*)
+with content:
+*1-1-org.brutusin.instrumentation.logging.SimpleClass.sayHello().log*:
 ```
 #Source: public static java.lang.String org.brutusin.instrumentation.logging.SimpleClass.sayHello(java.lang.String)
 #Start: Thu Jan 22 12:45:20 CET 2015
@@ -39,7 +55,26 @@ with content like that (case of *1-1-org.brutusin.instrumentation.logging.Simple
 #Returned:
 "Hello world, you fool, I love youuu! C'mon join the joyrideee!"
 ```
-
+*1-2-org.brutusin.instrumentation.logging.SimpleClass.joinTheJoyRide().log*:
+```
+#Source: public static java.lang.String org.brutusin.instrumentation.logging.SimpleClass.joinTheJoyRide()
+#Start: Thu Jan 22 12:45:21 CET 2015
+#Parameters:
+[ ]
+#Elapsed: 5 ms
+#Returned:
+"C'mon join the joyrideee!"
+```
+*1-3-org.brutusin.instrumentation.logging.SimpleClass.sayGoodBye().log*:
+```
+#Source: public static java.lang.String org.brutusin.instrumentation.logging.SimpleClass.sayGoodBye()
+#Start: Thu Jan 22 12:45:21 CET 2015
+#Parameters:
+[ ]
+#Elapsed: 21 ms
+#Returned:
+"Goodbye to you, goodbye to broken hearts"
+```
 
 ## Status of the project
 This project is still under development but serves well as an example.
