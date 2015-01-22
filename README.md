@@ -26,7 +26,7 @@ Files are ordered according to their execution order, and grouped in folders by 
 ## Tests
 Remark that project tests are run after a fat-agent-jar ([jar-with-dependencies](http://maven.apache.org/plugins/maven-assembly-plugin/descriptor-refs.html#jar-with-dependencies)) is created, and the *interceptor* class name is passed as the agent options (see [pom.xml](pom.xml))
 
-In this example the only instrumented methods are those of [SimpleClass](/src/test/java/org/brutusin/instrumentation/logging/SimpleClass.java):
+In this example the only instrumented methods are these of [SimpleClass](/src/test/java/org/brutusin/instrumentation/logging/SimpleClass.java):
 ```java
 public static String sayHello(String name) {
     return "Hello " + name + ", you fool, I love youuu! " + joinTheJoyRide();
