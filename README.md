@@ -4,12 +4,12 @@ This module is an extension of [instrumentation module](https://github.com/brutu
 **Table of Contents**
 
 - [org.brutusin:logging-instrumentation ](#org.brutusin:logging-instrumentation)
-        - [Output](#output)
-        - [Tests](#tests)
-        - [TODO](#todo)
-        - [Support, bugs and requests](#support-bugs-and-requests)
-        - [Authors](#authors)
-        - [License](#license)
+  - [Output](#output)
+  - [Tests](#tests)
+  - [TODO](#todo)
+  - [Support, bugs and requests](#support-bugs-and-requests)
+  - [Authors](#authors)
+  - [License](#license)
 
 ## Output
 
