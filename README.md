@@ -5,22 +5,41 @@ This module is an extension of [instrumentation module](https://github.com/brutu
 
 For each execution of an instrumented method, the agent generates a file such with the following information of the execution:
 
-* Source: Method instrumented
-* Start: Execution start date
-* Parameters: Serialization (if possible) of the method arguments
-* Elapsed: Execution duration
-* Returned: Serialization (if possible) of the method arguments/exceptions
+* **Source**: Method instrumented
+* **Start**: Execution start date
+* **Parameters**: Serialization (if possible) of the method arguments
+* **Elapsed**: Execution duration
+* **Returned**: Serialization (if possible) of the method arguments/exceptions
 
 Files are ordered according to their execution order, and grouped in folders by the execution thread. Root logging folder is passed as an interceptor parameter via the agent parameters.
 
 ## Tests
-Remark that project tests are run after a fat-agent-jar is created and the *interceptor* class name is passed as the agent options (see [pom.xml](pom.xml))
+Remark that project tests are run after a fat-agent-jar ([jar-with-dependencies](http://maven.apache.org/plugins/maven-assembly-plugin/descriptor-refs.html#jar-with-dependencies)) is created and the *interceptor* class name is passed as the agent options (see [pom.xml](pom.xml))
 
-In this example the only instrumented methods are those of the [LoggingInterceptor](/src/test/java/org/brutusin/instrumentation/logging/SimpleClass.java), being the relevant application code ([LoggingInterceptorTest](src/test/java/org/brutusin/instrumentation/logging/LoggingInterceptorTest.java)):
+In this example the only instrumented methods are those of [SimpleClass](/src/test/java/org/brutusin/instrumentation/logging/SimpleClass.java), being the relevant application code ([LoggingInterceptorTest](src/test/java/org/brutusin/instrumentation/logging/LoggingInterceptorTest.java)):
 ```java
 SimpleClass.sayHello("world");
 SimpleClass.sayGoodBye();
 ```
+
+Causing the following files being generated under `${java.io.tmpdir}/${project.artifactId}-tests`:
+```
+1-1-org.brutusin.instrumentation.logging.SimpleClass.sayHello().log
+1-2-org.brutusin.instrumentation.logging.SimpleClass.joinTheJoyRide().log
+1-3-org.brutusin.instrumentation.logging.SimpleClass.sayGoodBye().log
+```
+
+with content like that (case of *1-1-org.brutusin.instrumentation.logging.SimpleClass.sayHello().log*)
+```
+#Source: public static java.lang.String org.brutusin.instrumentation.logging.SimpleClass.sayHello(java.lang.String)
+#Start: Thu Jan 22 12:45:20 CET 2015
+#Parameters:
+[ "world" ]
+#Elapsed: 455 ms
+#Returned:
+"Hello world, you fool, I love youuu! C'mon join the joyrideee!"
+```
+
 
 ## Status of the project
 This project is still under development but serves well as an example.
