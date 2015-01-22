@@ -1,6 +1,16 @@
 #org.brutusin:logging-instrumentation [![Build Status](https://api.travis-ci.org/brutusin/logging-instrumentation.svg?branch=master)](https://travis-ci.org/brutusin/logging-instrumentation)
 This module is an extension of [instrumentation module](https://github.com/brutusin/instrumentation) that defines an *interceptor* ([LoggingInterceptor](src/main/java/org/brutusin/instrumentation/logging/LoggingInterceptor.java)) aimed at logging executions of third-party code.
 
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+
+- [org.brutusin:logging-instrumentation ](#)
+	- [Output](#output)
+	- [Tests](#tests)
+	- [TODO](#todo)
+	- [Support, bugs and requests](#support-bugs-and-requests)
+	- [Authors](#authors)
+	- [License](#license)
+
 ## Output
 
 For each execution of an instrumented method, the agent generates a file such with the following information of the execution:
