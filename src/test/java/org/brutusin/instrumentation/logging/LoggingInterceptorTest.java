@@ -22,5 +22,6 @@ public class LoggingInterceptorTest {
     @Test
     public void test() {
         SimpleClass.sayHello("world");
+        SimpleClass.sayGoodBye();
     }
 }

@@ -2,26 +2,30 @@
 This module is an extension of [instrumentation module](https://github.com/brutusin/instrumentation) and defines an interceptor ([LoggingInterceptor](src/main/java/org/brutusin/instrumentation/logging/LoggingInterceptor.java)) aimed at logging executions of third-party code.
 
 ## Output
-For each execution of an instrumented method, the agent generates a file such as:
-```
-1-1-org.brutusin.instrumentation.logging.SimpleClass.sayHello().log
-```
-with a content similar to:
-```
-#Source: public static java.lang.String org.brutusin.instrumentation.logging.SimpleClass.sayHello(java.lang.String)
-#Start: Thu Jan 22 11:40:14 CET 2015
-#Parameters:
-[ "world" ]
-#Elapsed: 414 ms
-#Returned:
-"Hello world!"
-```
+
+For each execution of an instrumented method, the agent generates a file such with the following information of the execution:
+
+* Source: Method instrumented
+* Start: Execution start date
+* Parameters: Serialization (if possible) of the method arguments
+* Elapsed: Execution duration
+* Returned: Serialization (if possible) of the method arguments/exceptions
+
 Files are ordered according to their execution order, and grouped in folders by the execution thread. Root logging folder is passed as an interceptor parameter via the agent parameters.
+
+## Tests
+Remark that project tests are run after a fat-agent-jar is created and the *interceptor* class name is passed as the agent options (see [pom.xml](pom.xml))
+
+In this example the only instrumented methods are those of the [LoggingInterceptor](/src/test/java/org/brutusin/instrumentation/logging/SimpleClass.java), being the relevant application code ([LoggingInterceptorTest](src/test/java/org/brutusin/instrumentation/logging/LoggingInterceptorTest.java)):
+```java
+SimpleClass.sayHello("world");
+SimpleClass.sayGoodBye();
+```
 
 ## Status of the project
 This project is still under development but serves well as an example.
 
-Remark that project tests are run after a fat-agent-jar is created and the *interceptor* class name is passed as the agent options (see [pom.xml](pom.xml))
+
 
 ## Support, bugs and requests
 https://github.com/brutusin/logging-instrumentation/issues
