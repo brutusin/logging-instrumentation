@@ -13,7 +13,7 @@ This module is an extension of [instrumentation module](https://github.com/brutu
 
 ## Output
 
-For each execution of an instrumented method, the agent generates a file such with the following information of the execution:
+For each execution of an instrumented method, the agent generates a file with the following information of the execution:
 
 * **Source**: Method instrumented
 * **Start**: Execution start date
