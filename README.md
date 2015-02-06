@@ -24,7 +24,7 @@ For each execution of an instrumented method, the agent generates a file with th
 Files are ordered according to their execution order, and grouped in folders by the execution thread. Root logging folder is passed as an interceptor parameter via the agent parameters.
 
 ## Tests
-Remark that project tests are run after a fat-agent-jar ([jar-with-dependencies](http://maven.apache.org/plugins/maven-assembly-plugin/descriptor-refs.html#jar-with-dependencies)) is created, and the *interceptor* class name is passed as the agent options (see [pom.xml](pom.xml))
+Remark that project tests are run after a fat-agent-jar ([jar-with-dependencies](http://maven.apache.org/plugins/maven-assembly-plugin/descriptor-refs.html#jar-with-dependencies)) is created, and the *interceptor* class name is passed as the agent options (see [pom.xml line 91](pom.xml#L91))
 
 In this example the only instrumented methods are these of [SimpleClass](/src/test/java/org/brutusin/instrumentation/logging/SimpleClass.java):
 ```java
