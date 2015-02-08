@@ -139,7 +139,7 @@ public class LoggingInterceptor extends Interceptor {
             return null;
         }
         try {
-            return JsonHelper.getDefaultInstance().getDataHelper().transform(obj, true);
+            return JsonHelper.getInstance().getDataHelper().transform(obj);
         } catch (Throwable th) {
             return obj.toString();
         }
