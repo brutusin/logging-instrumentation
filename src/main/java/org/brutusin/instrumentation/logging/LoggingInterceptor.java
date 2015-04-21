@@ -25,7 +25,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.io.FileUtils;
-import org.brutusin.commons.json.JsonHelper;
+import org.brutusin.commons.json.spi.JsonCodec;
 import org.brutusin.instrumentation.Interceptor;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.MethodNode;
@@ -139,7 +139,7 @@ public class LoggingInterceptor extends Interceptor {
             return null;
         }
         try {
-            return JsonHelper.getInstance().getDataHelper().transform(obj);
+            return JsonCodec.getInstance().transform(obj);
         } catch (Throwable th) {
             return obj.toString();
         }
