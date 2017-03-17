@@ -1,4 +1,4 @@
-#org.brutusin:logging-instrumentation [![Build Status](https://api.travis-ci.org/brutusin/logging-instrumentation.svg?branch=master)](https://travis-ci.org/brutusin/logging-instrumentation)
+# org.brutusin:logging-instrumentation [![Build Status](https://api.travis-ci.org/brutusin/logging-instrumentation.svg?branch=master)](https://travis-ci.org/brutusin/logging-instrumentation)
 This module is an extension of [instrumentation module](https://github.com/brutusin/instrumentation) that defines an *interceptor* ([LoggingInterceptor](src/main/java/org/brutusin/instrumentation/logging/LoggingInterceptor.java)) aimed at logging executions of third-party code.
 
 **Table of Contents**
@@ -114,6 +114,6 @@ https://github.com/brutusin/logging-instrumentation/issues
 
 Contributions are always welcome and greatly appreciated!
 
-##License
+## License
 Apache License, Version 2.0
 http://www.apache.org/licenses/LICENSE-2.0
